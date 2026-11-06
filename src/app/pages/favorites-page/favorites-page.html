@@ -1,0 +1,22 @@
+<div class="favorites-container">
+  <h2>Mes Séries Favorites</h2>
+
+  @if (favorites().length === 0) {
+    <p>Aucune série en favoris pour le moment.</p>
+  } @else {
+    <div class="shows-grid">
+      @for (show of favorites(); track show.id) {
+        <div class="show-card">
+          @if (show.image?.medium) {
+            <img [src]="show.image.medium" [alt]="show.name" />
+          }
+          <h3>{{ show.name }}</h3>
+          <div class="actions">
+            <a [routerLink]="['/show', show.id]" class="details-btn">Détails</a>
+            <button (click)="removeFavorite(show.id)" class="remove-btn">Retirer</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

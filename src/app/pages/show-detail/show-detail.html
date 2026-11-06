@@ -1,0 +1,24 @@
+<div class="detail-container">
+  <p><a routerLink="">← Retour à la recherche</a></p>
+
+  @if (loading()) {
+    <p class="loading">Chargement des détails...</p>
+  } @else if (show()) {
+    <div class="show-content">
+      @if (show().image?.original) {
+        <img [src]="show().image.original" [alt]="show().name" />
+      }
+      <div class="show-infos">
+        <h2>{{ show().name }}</h2>
+        <p><strong>Genres :</strong> {{ show().genres?.join(', ') }}</p>
+        <p><strong>Langue :</strong> {{ show().language }}</p>
+        <p><strong>Statut :</strong> {{ show().status }}</p>
+        <p><strong>Note moyenne :</strong> {{ show().rating?.average || 'N/A' }}/10</p>
+        
+        <!-- Le résumé renvoyé par TVMaze contient des balises HTML -->
+        <div class="summary" [innerHTML]="show().summary"></div>
+      </div>
+      <button (click)="toggleFavorite()">⭐ Ajouter / Retirer des favoris</button>
+    </div>
+  }
+</div>
